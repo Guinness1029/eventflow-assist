@@ -1,110 +1,370 @@
-Good.
-
-## Paste this into the editor
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EventFlow Assist helps restaurants, venues, caterers, and hospitality teams respond faster to event inquiries and book more conversations with less chaos." />
   <title>EventFlow Assist</title>
   <style>
+    :root {
+      --bg: #f6f1ea;
+      --paper: #fffdf9;
+      --ink: #1d2a32;
+      --muted: #5c6b73;
+      --headline: #11212d;
+      --accent: #8b5e34;
+      --accent-dark: #6d4826;
+      --soft: #efe3d4;
+      --border: rgba(17, 33, 45, 0.09);
+      --shadow: 0 14px 36px rgba(17, 33, 45, 0.08);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f5f2;
-      color: #1f2933;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #f2ece5 0%, #f8f4ee 100%);
+      color: var(--ink);
       line-height: 1.6;
     }
-    .wrap {
-      max-width: 800px;
+
+    .container {
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 36px 18px 72px;
     }
-    .box {
-      background: white;
-      border-radius: 14px;
-      padding: 28px;
-      margin-bottom: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+
+    .hero,
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
-    h1, h2 {
-      color: #102a43;
+
+    .hero {
+      padding: 64px 40px;
+      margin-bottom: 26px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(139, 94, 52, 0.12), transparent 28%),
+        linear-gradient(135deg, #fffdf9 0%, #faf3ea 100%);
     }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      color: var(--headline);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.08;
+      margin-bottom: 16px;
+      max-width: 820px;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+
+    p, li {
+      font-size: 1.03rem;
+    }
+
+    .lead {
+      font-size: 1.14rem;
+      max-width: 760px;
+      color: var(--ink);
+    }
+
+    .sublead {
+      max-width: 760px;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
     .btn {
       display: inline-block;
-      background: #7c3aed;
-      color: white;
       text-decoration: none;
-      padding: 12px 18px;
-      border-radius: 10px;
-      margin-top: 12px;
-      font-weight: bold;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.2s ease;
     }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .btn-secondary {
+      background: var(--soft);
+      color: var(--accent-dark);
+    }
+
+    .hero-points,
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero-points {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 28px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin-top: 18px;
+    }
+
+    .hero-point,
+    .mini-card,
+    .step {
+      border-radius: 16px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(139, 94, 52, 0.13);
+      padding: 16px;
+    }
+
+    .hero-point {
+      font-weight: 600;
+    }
+
+    .card {
+      padding: 30px;
+      margin-bottom: 22px;
+    }
+
     ul {
       padding-left: 20px;
+      margin: 0;
+    }
+
+    .pricing {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 16px;
+      font-weight: 700;
+      font-size: 1.08rem;
+    }
+
+    .quote {
+      font-size: 1.1rem;
+      color: var(--headline);
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .faq-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #fff9f1 0%, #f6ede2 100%);
+    }
+
+    .footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 20px 14px 48px;
+      }
+
+      .hero,
+      .card {
+        padding: 24px;
+      }
+
+      .pricing {
+        flex-direction: column;
+        gap: 8px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="box">
-      <h1>Help your team respond faster to event requests.</h1>
-      <p>EventFlow Assist helps hospitality businesses reply faster, follow up more consistently, and stay organized when private event and group requests come in.</p>
-      <p><strong>Simple, practical support for venues, restaurants, caterers, and hospitality teams.</strong></p>
-      <a class="btn" href="mailto:guinnessfam1029@gmail.com?subject=EventFlow%20Assist%20Overview">Get a Quick Overview</a>
-    </div>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">EventFlow Assist</div>
+      <h1>Turn more event inquiries into real conversations.</h1>
+      <p class="lead">EventFlow Assist helps restaurants, venues, caterers, and hospitality teams reply faster, follow up more consistently, and stay organized when event inquiries start coming in from all directions.</p>
+      <p class="sublead"><strong>Built for busy hospitality operators who do not need more software chaos — just a cleaner way to handle event business.</strong></p>
 
-    <div class="box">
-      <h2>The problem</h2>
-      <p>Event requests often come in through forms, email, phone calls, DMs, and word of mouth. When teams are already busy, follow-up gets delayed and opportunities get missed.</p>
-      <ul>
-        <li>Slow replies</li>
-        <li>Inconsistent follow-up</li>
-        <li>Leads getting lost</li>
-        <li>Too much manual back-and-forth</li>
-      </ul>
-    </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:guinnessfam1029@gmail.com?subject=EventFlow%20Assist%20Overview">Get a Quick Overview</a>
+        <a class="btn btn-secondary" href="#how-it-works">See How It Works</a>
+      </div>
 
-    <div class="box">
+      <div class="hero-points">
+        <div class="hero-point">Faster replies to new event inquiries</div>
+        <div class="hero-point">Better follow-up without more manual work</div>
+        <div class="hero-point">Less chaos for managers already juggling operations</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <p class="quote">If your team is busy, event follow-up is one of the easiest places for money to slip away.</p>
+      <p>Private event and group requests often come in through email, forms, calls, DMs, and staff handoffs. When the team is already buried in service, staffing, and daily operations, those requests can cool off fast.</p>
+      <div class="grid">
+        <div class="mini-card">Someone reaches out and waits too long for a reply</div>
+        <div class="mini-card">A good lead gets buried in an inbox or notebook</div>
+        <div class="mini-card">The same questions keep getting answered manually</div>
+        <div class="mini-card">Follow-up happens inconsistently because everyone is busy</div>
+      </div>
+    </section>
+
+    <section class="card">
       <h2>What EventFlow Assist does</h2>
-      <ul>
-        <li>Helps you reply faster to event requests</li>
-        <li>Creates simple follow-up messages</li>
-        <li>Keeps requests more organized</li>
-        <li>Reduces missed opportunities</li>
-      </ul>
-    </div>
+      <p>EventFlow Assist helps you clean up how event inquiries are handled so your team can respond faster, stay more organized, and miss fewer opportunities.</p>
+      <div class="grid">
+        <div class="step">
+          <h3>Faster first response</h3>
+          <p>Make sure people hear back quickly instead of wondering if their inquiry disappeared.</p>
+        </div>
+        <div class="step">
+          <h3>Simple follow-up messages</h3>
+          <p>Keep warm leads from going cold just because the team got pulled in ten directions.</p>
+        </div>
+        <div class="step">
+          <h3>Cleaner handoff and tracking</h3>
+          <p>Give the team a simpler way to keep event requests organized without adding another giant platform.</p>
+        </div>
+      </div>
+    </section>
 
-    <div class="box">
-      <h2>What’s included</h2>
+    <section class="card" id="how-it-works">
+      <h2>How it works</h2>
+      <div class="grid">
+        <div class="step">
+          <h3>1. Review the current process</h3>
+          <p>We look at how event inquiries come in now and where responses or follow-up tend to slow down.</p>
+        </div>
+        <div class="step">
+          <h3>2. Simplify the next steps</h3>
+          <p>We set up a lightweight structure for replies, follow-up messages, and common questions.</p>
+        </div>
+        <div class="step">
+          <h3>3. Give your team a cleaner system</h3>
+          <p>You get a process that is easier to manage and easier to hand off without creating more confusion.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>What’s included in the pilot</h2>
       <ul>
-        <li>Review of your current event request process</li>
-        <li>Simple intake workflow setup or cleanup</li>
-        <li>Instant response message</li>
+        <li>Review of your current event inquiry process</li>
+        <li>One simple intake workflow setup or cleanup</li>
+        <li>Instant response message for new inquiries</li>
         <li>Up to 3 follow-up messages</li>
-        <li>Answers to common questions</li>
+        <li>Answers to common event questions</li>
         <li>A simple tracker or pipeline</li>
+        <li>Handoff notes so the team stays aligned</li>
       </ul>
-    </div>
+    </section>
 
-    <div class="box">
+    <section class="card">
+      <h2>Built for hospitality teams like:</h2>
+      <div class="grid">
+        <div class="mini-card">Restaurants with private dining</div>
+        <div class="mini-card">Event venues</div>
+        <div class="mini-card">Banquet halls</div>
+        <div class="mini-card">Hotels with event space</div>
+        <div class="mini-card">Caterers</div>
+        <div class="mini-card">Teams handling weddings, parties, meetings, and group bookings</div>
+      </div>
+    </section>
+
+    <section class="card">
       <h2>Pilot pricing</h2>
-      <p><strong>Setup:</strong> $500</p>
-      <p><strong>Monthly pilot support:</strong> $250/month</p>
-      <p>This is meant to be lightweight and practical — not a giant software project.</p>
-    </div>
+      <div class="pricing">
+        <div>Setup: $500</div>
+        <div>Monthly pilot support: $250/month</div>
+      </div>
+      <p>This is meant to be lightweight, practical, and easy to test — not a giant software rollout and not a bloated agency package.</p>
+    </section>
 
-    <div class="box">
+    <section class="card">
+      <h2>Common questions</h2>
+      <div class="faq-item">
+        <h3>Is this software?</h3>
+        <p>No. It is a practical service that helps improve how your team handles event inquiries.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Will this replace our team?</h3>
+        <p>No. It supports your team by making replies, follow-up, and organization easier.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Will this create more work?</h3>
+        <p>The goal is the opposite. This is meant to reduce friction and make event requests easier to manage.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What kind of results are you aiming for?</h3>
+        <p>Faster replies, better follow-up, cleaner organization, and fewer missed opportunities.</p>
+      </div>
+    </section>
+
+    <section class="card cta-box">
       <h2>Want to see if it’s a fit?</h2>
-      <p>Email Jelvis for a short overview and a no-pressure fit check.</p>
-      <a class="btn" href="mailto:guinnessfam1029@gmail.com?subject=EventFlow%20Assist%20Fit%20Check">Ask a Few Questions</a>
+      <p>If your team handles event or group inquiries and you want a simpler, sharper follow-up process, EventFlow Assist may be worth a look.</p>
+      <p><strong>Email Jelvis for a short overview and a no-pressure fit check.</strong></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:guinnessfam1029@gmail.com?subject=EventFlow%20Assist%20Overview">Get the Overview</a>
+        <a class="btn btn-secondary" href="mailto:guinnessfam1029@gmail.com?subject=EventFlow%20Assist%20Fit%20Check">Ask a Few Questions</a>
+      </div>
+      <p class="small">Built to be simple, useful, and hospitality-aware.</p>
+    </section>
+
+    <div class="footer">
+      EventFlow Assist helps hospitality businesses respond faster to event inquiries, follow up more consistently, and turn more interest into real conversations.
     </div>
-  </div>
+  </main>
 </body>
 </html>
-```
-
-**“file committed”**
